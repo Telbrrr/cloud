@@ -1,0 +1,875 @@
+/* Variables and Configuration */
+:root {
+	--width: 90px;
+	--height: calc(1.5 * var(--width));
+	--gap: 16px;
+	/* More space between the grasshoppers */
+	--color-main: #8ae82a;
+	/* Bright green for the main body */
+	--color-antenna: #4a7c30;
+	/* Darker brown for the antennas */
+	--color-eye: #000000;
+	/* Black for the eyes */
+	--color-wing: #9ff542;
+	/* Light green for the wings */
+	--color-leg: #4a7c30;
+	/* Darker brown for the legs */
+	--belly-color: #f7d4a8;
+	/* Light orange for the belly */
+	--bg-color: #fbf8f2;
+	/* Lighter background for better contrast */
+	--outline-color: rgba(0, 0, 0, 0.3);
+	/* Color for the outlines */
+
+	/* Improved color palette for variations - More contrast to illustrate the Cicada principle */
+	--color-1: #85ee35;
+	/* Very light green - almost yellow */
+	--color-2: #6bc220;
+	/* Light green */
+	--color-3: #4a9a12;
+	/* Medium green */
+	--color-4: #377b0e;
+	/* Darker green */
+
+	/* Improved detail colors - More contrast */
+	--detail-1: #acff5a;
+	/* Very light green for details */
+	--detail-2: #8ff035;
+	/* Light green */
+	--detail-3: #78e428;
+	/* Light green */
+
+	/* New variables for effects */
+	--shadow-color: rgba(0, 0, 0, 0.35);
+	/* More pronounced shadow for better relief */
+	--highlight-color: rgba(255, 255, 255, 0.5);
+	/* More visible reflection */
+	--texture-opacity: 1;
+	/* More visible texture */
+	--transition-speed: 0.35s;
+
+	/* New variables for animations */
+	--hover-scale: 1.12;
+	--hover-brightness: 1.15;
+	--animation-duration-slow: 4.8s;
+	--animation-duration-medium: 2.4s;
+	--animation-duration-fast: 0.4s;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+body {
+	background: var(--bg-color);
+	background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23707F5A' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+	cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16,2 C12,4 5,10 16,30 C27,10 20,4 16,2 Z' fill='%237ED321' stroke='%234A7C30' stroke-width='1'/%3E%3Cpath d='M16,2 C16,10 15,20 16,30' stroke='%234A7C30' stroke-width='0.7' stroke-dasharray='2,2' fill='none'/%3E%3Cpath d='M10,15 C12,15 20,15 22,15' stroke='%234A7C30' stroke-width='0.5' stroke-dasharray='1,2' fill='none'/%3E%3Cpath d='M11,20 C13,21 19,19 21,20' stroke='%234A7C30' stroke-width='0.5' stroke-dasharray='1,2' fill='none'/%3E%3C/svg%3E")
+			16 16,
+		auto;
+	font-family: "Poppins", sans-serif;
+	margin: 0;
+	padding: 30px;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+h1 {
+	text-align: center;
+	color: #4d5d37;
+	margin-bottom: 40px;
+	font-size: 2.5rem;
+	font-weight: 600;
+	text-shadow: 2px 2px 4px var(--shadow-color);
+	letter-spacing: 1px;
+}
+
+#artboard {
+	margin: 20px auto;
+	width: calc(5 * (13 - 1) + 13 * (var(--gap) + var(--width)));
+	height: calc(5 * (5 - 1) + 5 * (var(--gap) + var(--height)));
+	padding: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
+	-webkit-backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cell {
+	position: relative;
+	box-sizing: border-box;
+	display: inline-block;
+	width: var(--width);
+	height: var(--height);
+	margin: 0px 0px var(--gap) var(--gap);
+	padding: 0px;
+}
+
+.cell div {
+	position: absolute;
+}
+
+/* Elements of the cricket */
+.antenna {
+	top: 0;
+	width: 2px;
+	height: calc(0.4 * var(--width));
+	background: var(--color-antenna);
+	border-radius: 4px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+	transition: transform var(--transition-speed);
+	outline: 0.5px solid var(--outline-color);
+}
+
+.antenna.antenna-left {
+	left: calc(0.4 * var(--width));
+	transform: rotate(-15deg);
+	transform-origin: bottom center;
+}
+
+.antenna.antenna-right {
+	right: calc(0.4 * var(--width));
+	transform: rotate(15deg);
+	transform-origin: bottom center;
+}
+
+.antenna-tip {
+	width: calc(0.08 * var(--width));
+	height: calc(0.08 * var(--width));
+	background: var(--color-antenna);
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	transition: transform var(--transition-speed);
+	outline: 0.5px solid var(--outline-color);
+}
+
+.antenna-tip.antenna-tip-left {
+	left: calc(0.4 * var(--width) - 0.04 * var(--width));
+	top: calc(0.4 * var(--width) - 0.08 * var(--width));
+}
+
+.antenna-tip.antenna-tip-right {
+	right: calc(0.4 * var(--width) - 0.04 * var(--width));
+	top: calc(0.4 * var(--width) - 0.08 * var(--width));
+}
+
+.body {
+	width: 100%;
+	height: calc(var(--height) - 0.28 * var(--width));
+	top: calc(0.28 * var(--width));
+	background: var(--color-main);
+	border-radius: 70% 70% 65% 65% / 80% 80% 60% 60%;
+	box-shadow: inset 0 -8px 16px var(--shadow-color),
+		0 6px 12px var(--shadow-color);
+	background-image: radial-gradient(
+			circle at 35% 25%,
+			var(--highlight-color),
+			transparent 65%
+		),
+		radial-gradient(circle at 65% 75%, var(--shadow-color), transparent 65%);
+	background-size: 100% 100%, 100% 100%;
+	background-position: 0 0, 0 0;
+	background-blend-mode: overlay;
+	opacity: var(--texture-opacity);
+	transition: transform var(--transition-speed), filter var(--transition-speed);
+	transform-origin: center bottom;
+	outline: 1px solid var(--outline-color);
+	background-blend-mode: normal, overlay, normal;
+	z-index: 2;
+}
+
+.head {
+	width: calc(0.72 * var(--width));
+	height: calc(0.52 * var(--width));
+	background: var(--color-main);
+	border-radius: 50%;
+	top: calc(0.14 * var(--height));
+	left: calc(50% - 0.36 * var(--width));
+	filter: brightness(1.15);
+	position: relative;
+	box-shadow: inset 0 3px 6px var(--highlight-color),
+		0 3px 6px var(--shadow-color);
+	transform-origin: center bottom;
+	outline: 0.8px solid var(--outline-color);
+	z-index: 3;
+}
+
+/* Add smile - plus expressif et mignon */
+.head::after {
+	content: "";
+	position: absolute;
+	width: 60%;
+	height: 30%;
+	border-bottom: 3px solid rgba(0, 0, 0, 0.6);
+	border-radius: 0 0 120% 120%;
+	bottom: 25%;
+	left: 20%;
+	transform: scaleX(1) rotate(0deg);
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Add belly with stripes - plus dodu et mignon */
+.body::after {
+	content: "";
+	position: absolute;
+	width: 80%;
+	height: 75%;
+	background: var(--belly-color);
+	border-radius: 50% 50% 45% 45% / 60% 60% 55% 55%;
+	bottom: 10%;
+	left: 10%;
+	background-image: repeating-linear-gradient(
+			0deg,
+			transparent,
+			transparent 6px,
+			rgba(0, 0, 0, 0.1) 6px,
+			rgba(0, 0, 0, 0.1) 12px
+		),
+		radial-gradient(
+			circle at 50% 50%,
+			rgba(255, 255, 255, 0.4) 0%,
+			transparent 70%
+		);
+	box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.4);
+	outline: 0.8px solid rgba(139, 108, 77, 0.4);
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wing {
+	width: calc(0.85 * var(--width));
+	height: calc(0.65 * var(--height));
+	background: var(--color-wing);
+	top: calc(0.32 * var(--height));
+	border-radius: 60% 60% 40% 40%;
+	transform-origin: top center;
+	box-shadow: inset 0 3px 6px var(--highlight-color),
+		inset -2px -4px 8px var(--shadow-color), 0 3px 6px var(--shadow-color);
+	background-image: linear-gradient(
+			135deg,
+			transparent 70%,
+			var(--highlight-color) 100%
+		),
+		linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 100%),
+		radial-gradient(circle at 30% 30%, var(--highlight-color) 0%, transparent 60%);
+	transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+	opacity: 0.95;
+	overflow: hidden;
+	outline: 0.8px solid var(--outline-color);
+	z-index: 1;
+}
+
+.wing.wing-left {
+	left: calc(0.09 * var(--width));
+	transform: rotate(6deg);
+}
+
+.wing.wing-right {
+	right: calc(0.09 * var(--width));
+	transform: rotate(-6deg) scaleX(-1);
+}
+
+.wing-pattern {
+	width: calc(0.75 * var(--width));
+	height: calc(0.55 * var(--height));
+	border-top: 1.5px solid rgba(0, 0, 0, 0.12);
+	border-left: 1.5px solid rgba(0, 0, 0, 0.12);
+	top: calc(0.36 * var(--height));
+	background-image: repeating-linear-gradient(
+		45deg,
+		transparent,
+		transparent 8px,
+		rgba(0, 0, 0, 0.06) 8px,
+		rgba(0, 0, 0, 0.06) 16px
+	);
+}
+
+.wing-pattern.wing-pattern-left {
+	left: calc(0.13 * var(--width));
+}
+
+.wing-pattern.wing-pattern-right {
+	right: calc(0.13 * var(--width));
+	transform: scaleX(-1);
+}
+
+/* Ajout de nervures sur les ailes */
+.wing::before {
+	content: "";
+	position: absolute;
+	width: 90%;
+	height: 90%;
+	top: 5%;
+	left: 5%;
+	background-image: linear-gradient(
+			90deg,
+			transparent 48%,
+			rgba(0, 0, 0, 0.08) 50%,
+			transparent 52%
+		),
+		linear-gradient(
+			0deg,
+			transparent 48%,
+			rgba(0, 0, 0, 0.08) 50%,
+			transparent 52%
+		);
+	background-size: 18px 18px;
+	opacity: 0.8;
+	pointer-events: none;
+}
+
+.leg {
+	display: none;
+	/* Hide the legs */
+}
+
+.eye {
+	width: calc(0.15 * var(--width));
+	height: calc(0.15 * var(--width));
+	background: var(--color-eye);
+	border-radius: 50%;
+	top: calc(0.12 * var(--height));
+	z-index: 5;
+	transition: transform 0.25s ease-out;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.eye.eye-left {
+	left: calc(0.28 * var(--width));
+	transform: rotate(0deg);
+}
+
+.eye.eye-right {
+	right: calc(0.28 * var(--width));
+	transform: rotate(0deg);
+}
+
+/* Replace the complex eyeballs */
+.eyeball {
+	display: none;
+}
+
+/* Reflections in the eyes */
+.eye-reflection {
+	position: absolute;
+	width: calc(0.06 * var(--width));
+	height: calc(0.06 * var(--width));
+	background: white;
+	border-radius: 50%;
+	top: 20%;
+	left: 20%;
+	opacity: 0.9;
+	transition: transform 0.1s ease-out;
+	z-index: 2;
+	/* Above the blinking */
+}
+
+.eye-reflection-secondary {
+	position: absolute;
+	width: calc(0.03 * var(--width));
+	height: calc(0.03 * var(--width));
+	background: white;
+	border-radius: 50%;
+	bottom: 25%;
+	right: 25%;
+	opacity: 0.7;
+	transition: transform 0.1s ease-out;
+	z-index: 2;
+	/* Above the blinking */
+}
+
+/* Reactivate partially the pseudo-elements for the blinking */
+.eye::before {
+	display: none;
+}
+
+/* Variations based on the Cicada principle (prime numbers) */
+/* Main variation based on cycle 2 */
+.cell:nth-child(2n + 1) .body {
+	background: var(--color-1);
+	transform: translateY(calc(0.02 * var(--height)));
+}
+
+/* Variation based on cycle 3 */
+.cell:nth-child(3n + 2) .body {
+	background: var(--color-2);
+	transform: translateY(calc(-0.03 * var(--height)));
+}
+
+/* Variation based on cycle 5 */
+.cell:nth-child(5n + 3) .body {
+	background: var(--color-3);
+	transform: translateY(calc(0.04 * var(--height)));
+}
+
+/* Variation based on cycle 7 */
+.cell:nth-child(7n + 5) .body {
+	background: var(--color-4);
+	transform: translateY(calc(-0.02 * var(--height)));
+}
+
+/* Additional variations for cycle 11 */
+.cell:nth-child(11n + 7) .head {
+	filter: brightness(1.2);
+}
+
+/* Variation on cycle 13 - longer cycle to create more diversity */
+.cell:nth-child(13n + 11) .antenna.antenna-left {
+	transform: rotate(-20deg);
+}
+
+.cell:nth-child(13n + 11) .antenna.antenna-right {
+	transform: rotate(20deg);
+}
+
+/* Variations of the wings */
+.cell:nth-child(3n) .wing {
+	background: var(--detail-1);
+}
+
+.cell:nth-child(5n) .wing {
+	background: var(--detail-2);
+}
+
+.cell:nth-child(7n) .wing {
+	background: var(--detail-3);
+}
+
+/* Eye animation */
+@keyframes eyeBlink {
+	0%,
+	95%,
+	100% {
+		transform: scaleY(1);
+	}
+
+	97% {
+		transform: scaleY(0.1);
+	}
+}
+
+/* Make the eyes blink occasionally without disrupting the tracking */
+.cell:nth-child(5n + 2) .eye::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-eye);
+	border-radius: 50%;
+	animation: eyeBlink 4.3s ease-in-out calc(random(3) * 1s) infinite;
+	z-index: 1;
+}
+
+.cell:nth-child(7n + 4) .eye::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-eye);
+	border-radius: 50%;
+	animation: eyeBlink 3.7s ease-in-out calc(random(3) * 1s) infinite;
+	z-index: 1;
+}
+
+/* Antenna animation on hover */
+@keyframes antennaWiggleLeft {
+	0%,
+	100% {
+		transform: rotate(-15deg);
+	}
+
+	25% {
+		transform: rotate(-8deg);
+	}
+
+	50% {
+		transform: rotate(-12deg);
+	}
+
+	75% {
+		transform: rotate(-5deg);
+	}
+}
+
+@keyframes antennaWiggleRight {
+	0%,
+	100% {
+		transform: rotate(15deg);
+	}
+
+	25% {
+		transform: rotate(8deg);
+	}
+
+	50% {
+		transform: rotate(12deg);
+	}
+
+	75% {
+		transform: rotate(5deg);
+	}
+}
+
+/* Body animation */
+@keyframes bodyBounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(-3px);
+	}
+}
+
+/* Wings animation */
+@keyframes wingFlutterLeft {
+	0%,
+	100% {
+		transform: rotate(6deg);
+		opacity: 0.92;
+	}
+
+	25% {
+		transform: rotate(12deg);
+		opacity: 0.96;
+	}
+
+	50% {
+		transform: rotate(18deg);
+		opacity: 1;
+	}
+
+	75% {
+		transform: rotate(14deg);
+		opacity: 0.96;
+	}
+}
+
+@keyframes wingFlutterRight {
+	0%,
+	100% {
+		transform: rotate(-6deg) scaleX(-1);
+		opacity: 0.92;
+	}
+
+	25% {
+		transform: rotate(-12deg) scaleX(-1);
+		opacity: 0.96;
+	}
+
+	50% {
+		transform: rotate(-18deg) scaleX(-1);
+		opacity: 1;
+	}
+
+	75% {
+		transform: rotate(-14deg) scaleX(-1);
+		opacity: 0.96;
+	}
+}
+
+/* Light wings animation at rest */
+@keyframes gentleWingShakeLeft {
+	0%,
+	100% {
+		transform: rotate(6deg);
+	}
+
+	50% {
+		transform: rotate(8deg);
+	}
+}
+
+@keyframes gentleWingShakeRight {
+	0%,
+	100% {
+		transform: rotate(-6deg) scaleX(-1);
+	}
+
+	50% {
+		transform: rotate(-8deg) scaleX(-1);
+	}
+}
+
+/* Optimized jump animation */
+@keyframes jump {
+	0% {
+		transform: translateY(0) scale(1) rotate(0deg);
+		filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+		animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	20% {
+		transform: translateY(-20px) scale(0.98) rotate(-2deg);
+		filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+		animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	40% {
+		transform: translateY(-50px) scale(1.1) rotate(3deg);
+		filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.1));
+	}
+
+	60% {
+		transform: translateY(-30px) scale(1.05) rotate(-1deg);
+		animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+	}
+
+	80% {
+		transform: translateY(-10px) scale(0.99) rotate(1deg);
+	}
+
+	100% {
+		transform: translateY(0) scale(1) rotate(0deg);
+	}
+}
+
+.cell.jump {
+	animation: jump 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+	z-index: 100;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+}
+
+/* Base animation for all crickets */
+.body {
+	animation: bodyBounce var(--animation-duration-slow) ease-in-out infinite;
+}
+
+.antenna.antenna-left {
+	animation: antennaWiggleLeft var(--animation-duration-medium) ease-in-out
+		infinite;
+}
+
+.antenna.antenna-right {
+	animation: antennaWiggleRight var(--animation-duration-medium) ease-in-out
+		infinite;
+}
+
+/* Light wings animation at rest */
+.wing.wing-left {
+	animation: gentleWingShakeLeft 4s ease-in-out infinite;
+}
+
+.wing.wing-right {
+	animation: gentleWingShakeRight 4s ease-in-out infinite;
+}
+
+/* Subtle parallax effect */
+@keyframes parallaxEffect {
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+
+	25% {
+		transform: translate(-2px, 1px);
+	}
+
+	50% {
+		transform: translate(0, 2px);
+	}
+
+	75% {
+		transform: translate(2px, 1px);
+	}
+}
+
+.head {
+	animation: parallaxEffect 8s ease-in-out infinite;
+}
+
+/* Note: The eye class should not have a parallax animation to allow for good cursor tracking */
+.eye.eye-left,
+.eye.eye-right {
+	/* Do not add parallaxEffect to the eyes, otherwise the cursor tracking will not work well */
+	/* animation: eyeBlink 4s ease-in-out infinite, parallaxEffect 8s ease-in-out infinite; */
+
+	/* The blinking animations are now handled by the nth-child selectors */
+}
+
+/* Light wing trembling at rest for certain crickets */
+.cell:nth-child(3n + 1) .wing.wing-left {
+	animation: gentleWingShakeLeft 3s ease-in-out infinite;
+}
+
+.cell:nth-child(3n + 1) .wing.wing-right {
+	animation: gentleWingShakeRight 3s ease-in-out infinite;
+}
+
+/* Random wing animation for certain crickets */
+.cell:nth-child(11n + 3) .wing.wing-left {
+	animation: wingFlutterLeft 4.5s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+}
+
+.cell:nth-child(11n + 3) .wing.wing-right {
+	animation: wingFlutterRight 4.5s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Hover effect on the whole cricket */
+.cell:hover {
+	transform: translateY(-8px) scale(var(--hover-scale)) rotate(2deg);
+	z-index: 10;
+	filter: brightness(var(--hover-brightness)) contrast(1.05);
+	transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hover effect on the head */
+.cell:hover .head {
+	transform: translateY(-3px) rotate(3deg);
+	transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover effect on the eyes */
+.cell:hover .eye {
+	transform: scale(1.12);
+	transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover effect on the antennas */
+.cell:hover .antenna-tip {
+	transform: scale(1.2);
+	transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animation of the antennas during the flyover */
+.cell:hover .antenna.antenna-left {
+	animation: antennaWiggleLeft 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95)
+		infinite;
+}
+
+.cell:hover .antenna.antenna-right {
+	animation: antennaWiggleRight 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95)
+		infinite;
+}
+
+/* Animation of the wings during the flyover */
+.cell:hover .wing.wing-left {
+	animation: wingFlutterLeft 0.45s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+}
+
+.cell:hover .wing.wing-right {
+	animation: wingFlutterRight 0.45s cubic-bezier(0.445, 0.05, 0.55, 0.95)
+		infinite;
+}
+
+/* Animation of the smile during the flyover */
+.cell:hover .head::after {
+	width: 70%;
+	left: 15%;
+	border-bottom: 4px solid rgba(0, 0, 0, 0.7);
+	border-radius: 0 0 150% 150%;
+	transform: scaleX(1.1);
+	bottom: 22%;
+}
+
+/* Animation of the belly during the flyover */
+.cell:hover .body::after {
+	transform: scale(1.05);
+	filter: brightness(1.05);
+}
+
+/* Improved responsive design */
+@media (max-width: 768px) {
+	:root {
+		--width: 12vw;
+		--gap: 2vw;
+		--height: calc(1.8 * var(--width));
+	}
+
+	body {
+		padding: 15px;
+		cursor: none;
+		/* Disable the native cursor on mobile */
+	}
+
+	h1 {
+		font-size: 1.8rem;
+		margin-bottom: 20px;
+	}
+
+	#artboard {
+		width: 100%;
+		max-width: 500px;
+		padding: 8px;
+		margin: 10px auto;
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+		border: none;
+	}
+
+	.cell {
+		margin: 0 1vw 2vw 1vw;
+	}
+
+	/* Adaptation of the animations for mobile */
+	@media (hover: none) {
+		.cell:hover {
+			transform: none !important;
+			filter: none !important;
+		}
+	}
+
+	/* Optimisation of the performance on mobile */
+	.wing::before,
+	.body::after {
+		display: none;
+	}
+}
+
+@media (max-width: 480px) {
+	:root {
+		--width: 18vw;
+		--height: calc(1.6 * var(--width));
+	}
+
+	h1 {
+		font-size: 1.5rem;
+	}
+
+	.eye {
+		width: calc(0.2 * var(--width));
+		height: calc(0.2 * var(--width));
+	}
+
+	/* Reduce animations on small screens */
+	@media (prefers-reduced-motion: no-preference) {
+		.body {
+			animation-duration: 8s;
+		}
+
+		.antenna {
+			animation-duration: 5s;
+		}
+	}
+}
+
+/* Adaptation tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+	:root {
+		--width: 15vw;
+		--gap: 2vw;
+	}
+
+	#artboard {
+		max-width: 90%;
+	}
+}
+
+/* Gestion of the reduction of movement */
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0s !important;
+		transition-duration: 0s !important;
+	}
+}
